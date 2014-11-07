@@ -49,7 +49,7 @@ Circle.prototype = _.extend(Circle.prototype, Node.prototype, {
   },
 
   hitTest: function(ctx, x, y, lx, ly) {
-	var dist = (this.x - x)*(this.x - x) + (this.y - y)*(this.y - y);
+	var dist = lx*lx + ly*ly;
     if (dist < this.radius2) {
       return this;
     }
