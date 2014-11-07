@@ -21,6 +21,7 @@ var NONE = [];
  */
 var Circle = function() {
   Node.apply(this, arguments);
+  this.radius2 = this.radius*this.radius
 };
 
 
@@ -48,8 +49,8 @@ Circle.prototype = _.extend(Circle.prototype, Node.prototype, {
   },
 
   hitTest: function(ctx, x, y, lx, ly) {
-	var dist = Math.sqrt( (this.x - x)*(this.x - x) + (this.y - y)*(this.y - y));
-    if (dist < this.radius) {
+	var dist = (this.x - x)*(this.x - x) + (this.y - y)*(this.y - y);
+    if (dist < this.radius2) {
       return this;
     }
   }
