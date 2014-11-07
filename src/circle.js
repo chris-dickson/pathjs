@@ -28,7 +28,7 @@ Circle.prototype = _.extend(Circle.prototype, Node.prototype, {
   draw: function(ctx) {
     var radius = this.radius || 0;
 	ctx.beginPath();
-	ctx.arc(this.x, this.y, radius, 0, 2 * Math.PI, false);
+	ctx.arc(0,0, radius, 0, 2 * Math.PI, false);
 
     if (this.fillStyle) {
 	  ctx.fillStyle = this.fillStyle;
@@ -48,7 +48,7 @@ Circle.prototype = _.extend(Circle.prototype, Node.prototype, {
   },
 
   hitTest: function(ctx, x, y, lx, ly) {
-	var dist = Math.sqrt( (this.x - lx)*(this.x - lx) + (this.y - ly)*(this.y - ly))
+	var dist = Math.sqrt( (this.x - x)*(this.x - x) + (this.y - y)*(this.y - y));
     if (dist < this.radius) {
       return this;
     }
