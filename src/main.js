@@ -26,6 +26,8 @@ var Path = function(element) {
   this.x = 0.5;
   this.y = 0.5;
 
+  this.zoomLevel = 1.0;
+
   // Bind members for convenient callback
   this.update = this.update.bind(this);
   this._handle = this._handle.bind(this);
@@ -103,6 +105,21 @@ _.extend(Path.prototype, Group.prototype, {
     if (this.devicePixelRatio != 1) {
       this.context.restore();
     }
+  },
+
+  zoomIn: function(x,y) {
+	this.zoomLevel++;
+	this.zoom(this.zoomLevel,x,y);
+  },
+  zoomOut: function(x,y) {
+	this.zoomLevel--;
+	this.zoom(this.zoomLevel,x,y);
+  },
+
+  zoom: function(level,x,y) {
+    this.scaleX = level;
+    this.scaleY = level;
+	this.update();
   },
 
   // General handler for simple events (click, mousedown, etc)
