@@ -44,6 +44,10 @@ Node.prototype = {
     return this;
   },
 
+  tweenObj: function(baseProp,attributes,transition) {
+	  this.tweenAttr.call(this[baseProp],attributes,transition);
+  },
+
   /**
    * Queues a set of node properties for an animated transition. Only
    * numeric properties can be animated. The length of the transition

@@ -21,7 +21,7 @@ var NONE = [];
  */
 var Circle = function() {
   Node.apply(this, arguments);
-  this.radius2 = this.radius*this.radius
+  this.radius2 = this.radius*this.radius;
 };
 
 
