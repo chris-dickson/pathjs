@@ -22,6 +22,46 @@ var Node = function(attributes) {
   _.extend(this, attributes);
 };
 
+var getEasingBase = function(name) {
+	var stringMap = {
+		'back': TWEEN.Easing.Back,
+		'bounce': TWEEN.Easing.Bounce,
+		'circular': TWEEN.Easing.Circular,
+		'cubic': TWEEN.Easing.Cubic,
+		'elastic': TWEEN.Easing.Elastic,
+		'exponential': TWEEN.Easing.Exponential,
+		'linear': TWEEN.Easing.Linear,
+		'quadratic': TWEEN.Easing.Quadratic,
+		'quartic': TWEEN.Easing.Quartic,
+		'quintic': TWEEN.Easing.Quintic
+	};
+	for (var ease in stringMap) {
+		if (stringMap.hasOwnProperty(ease)) {
+			if (name.indexOf(ease)!==-1) {
+				return stringMap[ease];
+			}
+		}
+	}
+	return TWEEN.Easing.Linear;
+};
+
+var getEasingFunction = function(name){
+	name = name.toLowerCase();
+	var easeBase = getEasingBase(name);
+	var ease = null;
+	if (name.indexOf('inout')!=-1) {
+		ease = easeBase.InOut
+	} else if (name.indexOf('in')!=-1) {
+		ease = easeBase.In;
+	} else if (name.indexOf('out')!=-1) {
+		ease = easeBase.Out;
+	}
+	if (!ease) {
+		ease = easeBase.None;
+	}
+	return ease;
+};
+
 Node.prototype = {
   /**
    * Simple
@@ -83,6 +123,7 @@ Node.prototype = {
 
     this.tween = new TWEEN.Tween(this)
       .to(attributes, transition.duration || 1000)
+	  .easing(getEasingFunction(transition.easing || 'linear'))
       .onComplete(function() {
         self.tween = null;
         if (transition.callback) {
