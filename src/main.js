@@ -169,6 +169,8 @@ var namespaceConstructors = {
   image: require('./image'),
   circle: require('./circle'),
   line: require('./line'),
+  arc: require('./arc'),
+  arrow: require('./arrow'),
   group: Group
 };
 

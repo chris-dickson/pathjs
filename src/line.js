@@ -23,24 +23,19 @@ var Line = function() {
   Node.apply(this, arguments);
 };
 
-
 Line.prototype = _.extend(Line.prototype, Node.prototype, {
   draw: function(ctx) {
     var source = this.source || {x:0,y:0};
     var dest = this.target || {x:0,y:0};
-
-
-    if (this.strokeStyle) {
-	  ctx.beginPath();
-      ctx.strokeStyle = this.strokeStyle;
-      ctx.lineWidth = this.lineWidth || 1;
-      ctx.setLineDash(this.lineDash || NONE);
-      ctx.setLineDashOffset(this.lineDashOffset || 0);
-	  ctx.moveTo(source.x,source.y);
-	  ctx.lineTo(dest.x,dest.y);
-      ctx.stroke();
-	  ctx.closePath();
-    }
+    ctx.beginPath();
+    ctx.strokeStyle = this.strokeStyle || 'black';
+    ctx.lineWidth = this.lineWidth || 1;
+    ctx.setLineDash(this.lineDash || NONE);
+    ctx.setLineDashOffset(this.lineDashOffset || 0);
+    ctx.moveTo(source.x,source.y);
+    ctx.lineTo(dest.x,dest.y);
+    ctx.stroke();
+    ctx.closePath();
   },
 
   hitTest: function(ctx, x, y, lx, ly) {
