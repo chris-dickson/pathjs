@@ -53,11 +53,30 @@ Group.prototype = _.extend(Group.prototype, Node.prototype, {
     }
   },
 
+  /**
+   * Removes all children from the group.   Returns a list of all children
+   * removed.
+   */
+  removeAll: function() {
+    var removedList = [];
+    for (var i = 0; i < this.children.length; i++) {
+      var removed = this.removeChild(this.children[i]);
+      if (removed) {
+        removedList.push(removed);
+      }
+    }
+    return removedList;
+  },
+
 
   hitTest: function(ctx, x, y, lx, ly) {
     var children = this.children;
     var clip = this.clip;
     var result;
+
+    if (this.noHit) {
+      return;
+    }
 
     if (clip) {
       if (lx < clip.x || lx > clip.x+clip.width && ly < clip.y && ly > clip.y+clip.height) {
