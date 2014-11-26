@@ -59,7 +59,7 @@ Group.prototype = _.extend(Group.prototype, Node.prototype, {
    */
   removeAll: function() {
     var removedList = [];
-    for (var i = 0; i < this.children.length; i++) {
+    for (var i = this.children.length-1; i >= 0; i--) {
       var removed = this.removeChild(this.children[i]);
       if (removed) {
         removedList.push(removed);
