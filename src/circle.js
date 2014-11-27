@@ -61,7 +61,7 @@ Circle.prototype = _.extend(Circle.prototype, Node.prototype, {
 
       ctx.font = textSize + 'px ' + fontStyle;
       ctx.textAlign = 'center';
-      ctx.textBaseline = 'alphabetic';
+      ctx.textBaseline = 'middle';
       ctx.fillStyle = fill;
       ctx.fillText(this.innerLabel,0,0);
 
