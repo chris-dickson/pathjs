@@ -46,6 +46,33 @@ Circle.prototype = _.extend(Circle.prototype, Node.prototype, {
       ctx.stroke();
     }
 	ctx.closePath();
+
+    if (this.innerLabel) {
+      var fill = this.innerLabelFillStyle;
+      var stroke = this.innerLabelStrokeStyle;
+      var lineSize = this.innerLabelLineWidth || 1;
+      var textSize = this.innerLabelTextSize || Math.floor(this.radius / 2.0);
+      var fontStyle = this.innerLabelFontStyle || 'sans-serif';
+
+      if (!fill && !stroke) {
+        fill = '#000000';
+        stroke = '#ffffff';
+      }
+
+      ctx.font = textSize + 'px ' + fontStyle;
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'alphabetic';
+      ctx.fillStyle = fill;
+      ctx.fillText(this.innerLabel,0,0);
+
+      if (stroke) {
+        ctx.strokeStyle = stroke;
+        ctx.lineWidth = lineSize;
+        ctx.strokeText(this.innerLabel,0,0);
+      }
+
+
+    }
   },
 
   hitTest: function(ctx, x, y, lx, ly) {
