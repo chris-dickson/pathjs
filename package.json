@@ -23,6 +23,6 @@
     "watchify": "^0.10.2"
   },
   "dependencies": {
-    "tween.js": "git://github.com/sole/tween.js"
+    "tween.js": "git://github.com/chris-dickson/tween.js"
   }
 }
