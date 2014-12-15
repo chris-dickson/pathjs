@@ -22,6 +22,13 @@ Text.prototype = _.extend(Text.prototype, Node.prototype, {
     ctx.textAlign = this.textAlign || 'start';
     ctx.textBaseline = this.textBaseline || 'alphabetic';
 
+    if (ctx.shadowColor) {
+      ctx.shadowColor = this.shadowColor;
+      ctx.shadowBlur = this.shadowBlur || 10;
+      ctx.shadowOffsetX = this.shadowOffsetX || 5;
+      ctx.shadowOffsetY = this.shadowOffsetY || 5;
+    }
+
     if (this.fillStyle) {
       ctx.fillStyle = this.fillStyle;
       ctx.fillText(this.text, 0, 0);
