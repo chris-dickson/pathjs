@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Example - Exploding Circles</title>
+</head>
+<body>
+<p>Click on the screen to see an explosion of circles</p>
+<canvas id="canvas" style="width:500px; height:500px; border: 1px solid black"></canvas>
+
+<script src="../vendor/tween.js/src/Tween.js"></script>
+<script src="../lib/path.js"></script>
+
+<script>
+  var scene = path(document.getElementById('canvas'));
+  document.getElementById('canvas').onclick = function(event) {
+    var countDown = 3;
+    var nodeBomb = path.circle({
+      fillStyle: '#a33',
+      strokeStyle: '#f77',
+      radius: 20,
+      lineWidth: 2,
+      innerLabel: countDown,
+      x: event.offsetX,
+      y: event.offsetY
+    });
+    scene.addChild(nodeBomb);
+    scene.update();
+
+    var intervalId = setInterval(function() {
+      if (countDown === 1) {
+        scene.removeChild(nodeBomb);
+        for (var i = 0; i < 30; i++) {
+          var bit = path.circle({
+            fillStyle: '#a33',
+            strokeStyle: '#f77',
+            radius: 5 + Math.floor(Math.random()*10),
+            lineWidth: 2,
+            x: nodeBomb.x,
+            y: nodeBomb.y,
+            opacity: 1
+          });
+          scene.addChild(bit);
+          var span = 150 + Math.floor(Math.random() * 700);
+          bit.tweenAttr({
+            x : bit.x + (-(span/2) + Math.floor(Math.random() * span)),
+            y : bit.y + (-(span/2) + Math.floor(Math.random() * span)),
+            radius : Math.floor(bit.radius * 0.4),
+            opacity: 0
+          },{duration:500});
+        }
+        clearInterval(intervalId);
+        scene.update();
+      } else {
+        countDown--;
+        nodeBomb.innerLabel = countDown;
+        scene.update();
+      }
+    },1000);
+  }
+  scene.update();
+
+</script>
+</body>
+</html>

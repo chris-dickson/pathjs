@@ -26,8 +26,6 @@ var Path = function(element) {
   this.x = 0.5;
   this.y = 0.5;
 
-  this.zoomLevel = 1.0;
-
   // Bind members for convenient callback
   this.update = this.update.bind(this);
   this._handle = this._handle.bind(this);

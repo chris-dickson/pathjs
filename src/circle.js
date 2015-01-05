@@ -21,15 +21,15 @@ var NONE = [];
  */
 var Circle = function() {
   Node.apply(this, arguments);
-  this.radius2 = this.radius*this.radius;
+  this.radius2 = this.radius*this.radius
 };
 
 
 Circle.prototype = _.extend(Circle.prototype, Node.prototype, {
   draw: function(ctx) {
     var radius = this.radius || 0;
-	ctx.beginPath();
-	ctx.arc(0,0, radius, 0, 2 * Math.PI, false);
+	  ctx.beginPath();
+	  ctx.arc(0,0, radius, 0, 2 * Math.PI, false);
 
     if (this.fillStyle) {
 	  ctx.fillStyle = this.fillStyle;
@@ -45,34 +45,7 @@ Circle.prototype = _.extend(Circle.prototype, Node.prototype, {
       ctx.setLineDashOffset(this.lineDashOffset || 0);
       ctx.stroke();
     }
-	ctx.closePath();
-
-    if (this.innerLabel) {
-      var fill = this.innerLabelFillStyle;
-      var stroke = this.innerLabelStrokeStyle;
-      var lineSize = this.innerLabelLineWidth || 1;
-      var textSize = this.innerLabelTextSize || Math.floor(this.radius / 2.0);
-      var fontStyle = this.innerLabelFontStyle || 'sans-serif';
-
-      if (!fill && !stroke) {
-        fill = '#000000';
-        stroke = '#ffffff';
-      }
-
-      ctx.font = textSize + 'px ' + fontStyle;
-      ctx.textAlign = 'center';
-      ctx.textBaseline = 'middle';
-      ctx.fillStyle = fill;
-      ctx.fillText(this.innerLabel,0,0);
-
-      if (stroke) {
-        ctx.strokeStyle = stroke;
-        ctx.lineWidth = lineSize;
-        ctx.strokeText(this.innerLabel,0,0);
-      }
-
-
-    }
+	  ctx.closePath();
   },
 
   hitTest: function(ctx, x, y, lx, ly) {
