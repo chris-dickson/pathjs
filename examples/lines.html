@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Example - Following Rects</title>
+</head>
+<body>
+<p>Click on the screen to create points</p>
+<div style="margin-bottom: 5px">
+  <select id="lineStyle">
+    <option value="line" selected="selected">Line</option>
+    <option value="arrow">Arrow</option>
+    <option value="arc">Arc</option>
+  </select>
+  <button id="clearBtn">Clear</button>
+</div>
+<canvas id="canvas" style="width:500px; height:500px; border: 1px solid black;"></canvas>
+
+<script src="../vendor/tween.js/src/Tween.js"></script>
+<script src="../lib/path.js"></script>
+
+<script>
+  var canvas = document.getElementById('canvas');
+  var lineStyleSelect = document.getElementById('lineStyle');
+  var scene = path(canvas);
+  var lines = [];
+  var points = [];
+  var lineType = lineStyleSelect.options[lineStyleSelect.selectedIndex].value;
+
+  canvas.onclick = function(e) {
+    points.push({
+      x : e.offsetX,
+      y : e.offsetY
+    });
+    if (points.length > 1) {
+      var line = path.line({
+        source : points[points.length-2],
+        target : points[points.length-1],
+        type: lineType
+      });
+      lines.push(line);
+      scene.addChild(line);
+    }
+    scene.update();
+  };
+  document.getElementById('clearBtn').onclick = function() {
+    for (var i = 0; i < lines.length; i++) {
+      scene.removeChild(lines[i]);
+    }
+    lines = [];
+    points = [];
+    scene.update();
+  };
+  lineStyleSelect.onchange = function() {
+    lineType = lineStyleSelect.options[lineStyleSelect.selectedIndex].value;
+    for (var i = 0; i < lines.length; i++) {
+      lines[i].type = lineType;
+    }
+    scene.update();
+  };
+
+  var drawPoints = function() {
+
+  };
+  drawPoints();
+
+</script>
+</body>
+</html>

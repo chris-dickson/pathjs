@@ -105,21 +105,6 @@ _.extend(Path.prototype, Group.prototype, {
     }
   },
 
-  zoomIn: function(x,y) {
-	this.zoomLevel++;
-	this.zoom(this.zoomLevel,x,y);
-  },
-  zoomOut: function(x,y) {
-	this.zoomLevel--;
-	this.zoom(this.zoomLevel,x,y);
-  },
-
-  zoom: function(level,x,y) {
-    this.scaleX = level;
-    this.scaleY = level;
-	this.update();
-  },
-
   // General handler for simple events (click, mousedown, etc)
   _handle: function(e) {
     var hit = this.pick(this.context, e.offsetX, e.offsetY, e.offsetX, e.offsetY);
